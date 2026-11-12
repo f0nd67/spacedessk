@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b10">
+<title>FOND Virtual Gaming Device 1.1</title>
+<style>
+:root{color-scheme:dark;--bg:#090b10;--panel:#121722;--panel2:#192131;--line:#283244;--text:#f3f6fc;--muted:#9aa7ba;--accent:#9b8cff;--good:#68d6a4;--warn:#ffcc75}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#252044 0,transparent 48%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+button,input{font:inherit}.wrap{max-width:760px;margin:auto;padding:22px 16px 40px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.brand{font-weight:850;letter-spacing:.13em;font-size:18px}.pill{border:1px solid var(--line);border-radius:99px;padding:5px 10px;color:var(--muted);font-size:12px}
+.device{border:1px solid #343d50;background:linear-gradient(145deg,#161c29,#0d1119);border-radius:34px;padding:12px;max-width:440px;margin:0 auto 22px;box-shadow:0 24px 70px #0009}
+.screen{min-height:480px;border-radius:25px;background:linear-gradient(160deg,#171d2c,#0c1019 65%);padding:22px 18px;display:flex;flex-direction:column}
+.status{display:flex;justify-content:space-between;color:#c2cada;font-size:12px;margin-bottom:35px}.orb{width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,#b7aaff,#6653c9);display:grid;place-items:center;font-size:25px;box-shadow:0 8px 30px #806cff55}
+h1{font-size:25px;line-height:1.15;margin:16px 0 6px}p{margin:0;color:var(--muted)}.sub{font-size:13px}
+.game{margin-top:28px;border:1px solid var(--line);background:#ffffff08;border-radius:20px;padding:16px;min-height:142px}
+.gamehead{display:flex;gap:12px;align-items:center}.gameicon{width:48px;height:48px;border-radius:14px;background:var(--panel2);display:grid;place-items:center;font-size:23px}
+.game-name{font-weight:700;overflow-wrap:anywhere}.game-meta{font-size:12px;color:var(--muted)}
+.actions{display:flex;gap:9px;margin-top:16px;flex-wrap:wrap}button,.filelabel{border:0;border-radius:12px;padding:11px 15px;font-weight:700;cursor:pointer;background:var(--accent);color:#100d20}.secondary{background:#252e40;color:var(--text);border:1px solid #39465d}.danger{background:#3a2028;color:#ffc1c8;border:1px solid #6a3440}button:disabled{opacity:.45;cursor:not-allowed}
+.note{font-size:12px;color:var(--muted);margin-top:auto;padding-top:22px}
+.panel{max-width:560px;margin:auto;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px}.panel h2{font-size:16px;margin:0 0 8px}.row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}.row:last-child{border:0}.row span:last-child{color:var(--muted);text-align:right}.bar{height:7px;background:#293246;border-radius:9px;overflow:hidden;margin-top:8px}.bar>i{display:block;height:100%;width:0;background:var(--accent)}
+.statusmsg{margin-top:12px;font-size:13px;color:var(--muted);min-height:20px}.warning{border:1px solid #6a512d;background:#332817;color:#ffe0a8;padding:13px;border-radius:14px;font-size:13px;margin:0 auto 16px;max-width:560px}
+.hidden{display:none!important}input[type=file]{display:none}.foot{text-align:center;color:#657187;font-size:11px;margin-top:18px}
+@media(max-width:420px){.screen{min-height:455px}.wrap{padding:15px 10px 30px}.device{border-radius:28px}.screen{border-radius:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="brand">FOND <span style="color:#a99aff">DEVICE</span></div><div class="pill">LOCAL · SINGLE GAME</div></header>
+  <div class="warning"><b>Giới hạn quan trọng:</b> Website có thể lưu tệp APK trên điện thoại, nhưng trình duyệt không thể cài đặt hay chạy APK Android trực tiếp. Muốn chơi APK cần Android thật hoặc một Android emulator/runtime tương thích.</div>
+  <section class="device" aria-label="Thiết bị chơi game ảo">
+    <div class="screen">
+      <div class="status"><span id="clock">FOND OS</span><span>LOCAL STORAGE ◈</span></div>
+      <div class="orb">F</div>
+      <h1>Gaming Device</h1>
+      <p class="sub">Một thiết bị · Một trò chơi · Dữ liệu lưu trên máy</p>
+      <div class="game">
+        <div class="gamehead">
+          <div class="gameicon">🎮</div>
+          <div style="min-width:0;flex:1"><div class="game-name" id="gameName">Chưa cài game</div><div class="game-meta" id="gameMeta">Chọn một tệp APK để lưu vào thiết bị</div></div>
+          <span id="gameState" class="pill">EMPTY</span>
+        </div>
+        <div class="actions">
+          <label class="filelabel" for="apkFile" id="installLabel">＋ Chọn APK</label>
+          <input id="apkFile" type="file" accept=".apk,application/vnd.android.package-archive,application/zip">
+          <button id="installAndroidBtn" disabled>Cài trên Android</button>
+          <button class="secondary" id="playBtn" disabled>Chơi trên web</button>
+          <button class="danger" id="deleteBtn" disabled>Gỡ game</button>
+        </div>
+        <div class="statusmsg" id="message" role="status">Đang kiểm tra bộ nhớ cục bộ…</div>
+      </div>
+      <div class="note">FOND Virtual Gaming Device · Prototype lưu trữ cục bộ</div>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>Bộ nhớ thiết bị</h2>
+    <div class="row"><span>Dữ liệu game</span><span id="storedSize">0 B</span></div>
+    <div class="row"><span>Dung lượng trình duyệt đã dùng</span><span id="quota">Đang kiểm tra…</span></div>
+    <div class="bar"><i id="usageBar"></i></div>
+    <div class="row" style="margin-top:8px"><span>Chế độ lưu</span><span>IndexedDB · Trên thiết bị</span></div>
+    <div class="row"><span>Thiết bị</span><span>Một game duy nhất</span></div>
+  </section>
+  <div class="foot">Dữ liệu có thể bị xóa nếu người dùng xóa dữ liệu trang web hoặc trình duyệt thu hồi bộ nhớ.</div>
+</div>
+<script>
+(() => {
+  "use strict";
+  const DB_NAME = "fond_virtual_device";
+  const STORE = "installed_game";
+  const KEY = "single_game";
+  const $ = id => document.getElementById(id);
+  let db;
+
+  function formatBytes(bytes) {
+    if (!Number.isFinite(bytes) || bytes <= 0) return "0 B";
+    const units = ["B","KB","MB","GB"];
+    const i = Math.min(Math.floor(Math.log(bytes)/Math.log(1024)), units.length-1);
+    return (bytes/Math.pow(1024,i)).toFixed(i ? 1 : 0) + " " + units[i];
+  }
+  function message(text, error=false) {
+    $("message").textContent = text;
+    $("message").style.color = error ? "#ffabb5" : "";
+  }
+  function openDB() {
+    return new Promise((resolve,reject) => {
+      const request = indexedDB.open(DB_NAME, 1);
+      request.onupgradeneeded = () => {
+        const database = request.result;
+        if (!database.objectStoreNames.contains(STORE)) database.createObjectStore(STORE);
+      };
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+  function getGame() {
+    return new Promise((resolve,reject) => {
+      const tx = db.transaction(STORE,"readonly");
+      const req = tx.objectStore(STORE).get(KEY);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  function saveGame(game) {
+    return new Promise((resolve,reject) => {
+      const tx = db.transaction(STORE,"readwrite");
+      tx.objectStore(STORE).put(game,KEY);
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+      tx.onabort = () => reject(tx.error);
+    });
+  }
+  function removeGame() {
+    return new Promise((resolve,reject) => {
+      const tx = db.transaction(STORE,"readwrite");
+      tx.objectStore(STORE).delete(KEY);
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function refresh() {
+    const game = await getGame();
+    const exists = !!game;
+    $("gameName").textContent = exists ? game.name : "Chưa cài game";
+    $("gameMeta").textContent = exists
+      ? `${formatBytes(game.size)} · Đã lưu ${new Date(game.savedAt).toLocaleString("vi-VN")}`
+      : "Chọn một tệp APK để lưu vào thiết bị";
+    $("gameState").textContent = exists ? "SAVED" : "EMPTY";
+    $("storedSize").textContent = exists ? formatBytes(game.size) : "0 B";
+    $("installAndroidBtn").disabled = !exists;
+    $("playBtn").disabled = !exists;
+    $("deleteBtn").disabled = !exists;
+    $("installLabel").textContent = exists ? "↻ Thay APK" : "＋ Chọn APK";
+    await refreshQuota();
+  }
+  async function refreshQuota() {
+    if (!navigator.storage || !navigator.storage.estimate) {
+      $("quota").textContent = "Không hỗ trợ";
+      return;
+    }
+    const e = await navigator.storage.estimate();
+    $("quota").textContent = `${formatBytes(e.usage || 0)} / ${formatBytes(e.quota || 0)}`;
+    $("usageBar").style.width = e.quota ? Math.min(100,(e.usage/e.quota)*100) + "%" : "0%";
+  }
+  $("apkFile").addEventListener("change", async event => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    if (!file.name.toLowerCase().endsWith(".apk")) {
+      message("Vui lòng chọn tệp có đuôi .apk.", true); event.target.value=""; return;
+    }
+    if (!file.size) {
+      message("Tệp rỗng, không thể lưu.", true); event.target.value=""; return;
+    }
+    const old = await getGame();
+    const ok = !old || confirm("Thiết bị chỉ chứa một game. Thay thế game hiện tại bằng APK mới?");
+    if (!ok) { event.target.value=""; return; }
+    try {
+      message("Đang lưu APK vào bộ nhớ trên điện thoại…");
+      if (navigator.storage && navigator.storage.persist) await navigator.storage.persist();
+      await saveGame({name:file.name,size:file.size,type:file.type || "application/vnd.android.package-archive",blob:file,savedAt:Date.now()});
+      await refresh();
+      message("Đã lưu APK cục bộ. Dùng 'Cài trên Android' để tải tệp xuống và mở trình cài đặt của Android.");
+    } catch (err) {
+      message("Không lưu được APK: " + (err && err.message ? err.message : "lỗi bộ nhớ"), true);
+    }
+    event.target.value="";
+  });
+  $("installAndroidBtn").addEventListener("click", async () => {
+    try {
+      const game = await getGame();
+      if (!game || !game.blob) {
+        message("Không tìm thấy APK trong bộ nhớ thiết bị.", true);
+        return;
+      }
+      const url = URL.createObjectURL(game.blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = game.name.toLowerCase().endsWith(".apk") ? game.name : "fond-game.apk";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      message("Đã gửi APK sang mục Tải xuống. Mở tệp APK vừa tải để Android hiển thị trình cài đặt; bạn cần tự xác nhận cài đặt.");
+    } catch (err) {
+      message("Không xuất được APK: " + (err && err.message ? err.message : "lỗi"), true);
+    }
+  });
+  $("playBtn").addEventListener("click", () => {
+    message("Chức năng chạy APK trực tiếp trên web chưa được hỗ trợ. Bạn có thể dùng 'Cài trên Android' để cài game vào điện thoại và chơi bằng ứng dụng Android.");
+  });
+  $("deleteBtn").addEventListener("click", async () => {
+    if (!confirm("Xóa game và toàn bộ tệp APK đã lưu trong FOND Device?")) return;
+    try { await removeGame(); await refresh(); message("Đã xóa dữ liệu game khỏi FOND Device."); }
+    catch (err) { message("Không thể xóa dữ liệu: " + err.message, true); }
+  });
+  $("clock").textContent = new Date().toLocaleTimeString("vi-VN",{hour:"2-digit",minute:"2-digit"});
+  (async () => {
+    try {
+      if (!("indexedDB" in window)) throw new Error("Trình duyệt không hỗ trợ IndexedDB.");
+      db = await openDB();
+      if (navigator.storage && navigator.storage.persist) await navigator.storage.persist();
+      await refresh();
+      message("Thiết bị sẵn sàng. Dữ liệu APK được lưu cục bộ.");
+    } catch (err) {
+      message("Không khởi tạo được bộ nhớ: " + err.message, true);
+    }
+  })();
+})();
+</script>
+</body>
+</html>
